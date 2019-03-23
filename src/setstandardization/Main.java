@@ -17,7 +17,7 @@ public class Main {
 	public static void main(String... args) {
 		
 		//INPUT FILES DIRECTORY
-		File[] files = new File("/Users/Bassem/Documents/trainingdata/faces/")
+		File[] files = new File("/Users/Bassem/Downloads/imagedirectory")
 				.listFiles();
 
 		List<BufferedImage> images = load(files);
@@ -27,21 +27,21 @@ public class Main {
 		// EXTRA: PRINTS THE MEAN IMAGE AND THE STANDARD DEVIATION IMAGE OF THE SET
 		try {
 			// OUTPUT DIRECTORY FOR BOTH FILES
-			String path = "/Users/Bassem/Downloads/";
+			String path = "/Users/Bassem/Documents/output";
 			File outputfile = new File(path + "trial-average.jpg");
 			ImageIO.write(average, "jpg", outputfile);
 			File outputfile2 = new File(path + "trial-std.jpg");
 			ImageIO.write(std, "jpg", outputfile2);
+			standardize(images, average, std, path);
 		} catch (IOException e) {
-			
+			System.out.println(e);
 		}
-		standardize(images, average, std);
 	}
 
 	public static void standardize(List<BufferedImage> images,
-			BufferedImage average, BufferedImage std) {
+			BufferedImage average, BufferedImage std, String output_path) {
 		// OUTPUT DIRECTORY	OF STANDARDIZED IMAGES
-		String path = "/Users/Bassem/Downloads/standardized_training/";
+		String path = output_path;
 		int i = 0;
 		for (BufferedImage originalImage : images) {
 			try {
